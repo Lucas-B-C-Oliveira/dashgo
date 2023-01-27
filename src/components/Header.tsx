@@ -1,5 +1,5 @@
-import { Flex, Input, Text, Icon } from "@chakra-ui/react";
-import { RiSearchLine } from 'react-icons/ri'
+import { Flex, Input, Text, Icon, HStack, Box, Avatar } from "@chakra-ui/react";
+import { RiSearchLine, RiNotificationLine, RiUserAddLine } from 'react-icons/ri'
 
 
 export function Header() {
@@ -49,6 +49,35 @@ export function Header() {
         />
 
         <Icon as={RiSearchLine} fontSize="20" />
+      </Flex>
+
+      <Flex
+        align="center"
+        ml="auto"
+      >
+        <HStack
+          spacing="8"
+          mx="8"
+          pr="8"
+          py="1"
+          color="gray.300"
+          borderRightWidth={1}
+          borderColor="gray.700"
+        >
+          <Icon as={RiNotificationLine} fontSize="20" />
+          <Icon as={RiUserAddLine} fontSize="20" />
+        </HStack>
+
+        <Flex align="center">
+          <Box mr="4" textAlign="right">
+            <Text>Lucas Oliveira</Text>
+            <Text color="gray.300" fontSize="small">
+              lucas.schell.f@gmail.com
+            </Text>
+          </Box>
+          <Avatar size="md" name="Lucas Oliveira" src="https://github.com/lucas-b-c-oliveira.png" />
+        </Flex>
+
       </Flex>
 
     </Flex>
