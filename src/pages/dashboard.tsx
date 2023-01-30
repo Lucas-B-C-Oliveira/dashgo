@@ -63,7 +63,7 @@ export default function Dashboard() {
         w="100%" my="6" maxWidth={1480} mx="auto" px="6"
       >
         <Sidebar />
-        <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
+        <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignContent="flex-start">
 
           <Box
             p="8"
@@ -88,6 +88,6 @@ export default function Dashboard() {
 
         </SimpleGrid>
       </Flex>
-    </Flex>
+    </Flex >
   )
 }
