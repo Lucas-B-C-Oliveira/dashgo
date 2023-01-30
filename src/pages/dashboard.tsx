@@ -33,12 +33,12 @@ const options = {
     },
     categories: [
       '2021-03-18T00:00:00.000Z',
-      '2021-03-19T00:00:00.000Z',
-      '2021-03-20T00:00:00.000Z',
-      '2021-03-21T00:00:00.000Z',
-      '2021-03-22T00:00:00.000Z',
-      '2021-03-23T00:00:00.000Z',
-      '2021-03-24T00:00:00.000Z',
+      '2021-04-19T00:00:00.000Z',
+      '2021-05-20T00:00:00.000Z',
+      '2021-06-21T00:00:00.000Z',
+      '2021-07-22T00:00:00.000Z',
+      '2021-08-23T00:00:00.000Z',
+      '2021-09-24T00:00:00.000Z',
     ],
   },
   fill: {
@@ -50,6 +50,7 @@ const options = {
     }
   }
 }
+
 const series = [
   { name: 'series1', data: [31, 120, 10, 28, 61, 18, 109] }
 ]
@@ -72,7 +73,7 @@ export default function Dashboard() {
             pb="4"
           >
             <Text fontSize="lg" mb="4">Inscritos da semana</Text>
-            <Chart options={options} series={series} type="area" height={160} />
+            <Chart options={options} series={series} type="area" height={160} width={500} />
           </Box>
 
           <Box
@@ -82,7 +83,7 @@ export default function Dashboard() {
             pb="4"
           >
             <Text fontSize="lg" mb="4">Taxa de abertura</Text>
-            <Chart options={options} series={series} type="area" height={160} />
+            <Chart options={options} series={series} type="area" height={160} width={500} />
 
           </Box>
 
