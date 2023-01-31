@@ -3,6 +3,7 @@ import { Pagination } from '@/components/Pagination';
 import { Sidebar } from '@/components/Sidebar';
 import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { RiAddLine } from 'react-icons/ri';
 
 export default function UserList() {
@@ -11,6 +12,12 @@ export default function UserList() {
     base: false,
     lg: true
   })
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/users')
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }, [])
 
   return (
     <Box>
@@ -21,18 +28,17 @@ export default function UserList() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">Usuários</Heading>
 
-            {/* <Link href="/users/create" passHref>
-              <Button
-                as="a"
-                size="sm"
-                fontSize="sm"
-                colorScheme="pink"
-                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
-              >
-                Criar Novo
-              </Button>
+            <Button
+              as={Link}
+              size="sm"
+              fontSize="sm"
+              colorScheme="pink"
+              leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+              href="/users/create"
+            >
+              Criar Novo
+            </Button>
 
-            </Link> */}
 
             <Button
               as="a"
