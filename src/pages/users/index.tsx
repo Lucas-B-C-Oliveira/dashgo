@@ -21,7 +21,7 @@ export default function UserList() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">Usuários</Heading>
 
-            <Link href="/users/create" passHref>
+            {/* <Link href="/users/create" passHref>
               <Button
                 as="a"
                 size="sm"
@@ -31,7 +31,21 @@ export default function UserList() {
               >
                 Criar Novo
               </Button>
-            </Link>
+
+            </Link> */}
+
+            <Button
+              as="a"
+              size="sm"
+              fontSize="sm"
+              colorScheme="pink"
+              leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+            >
+              Criar Novo
+            </Button>
+
+
+
           </Flex>
           <Table colorScheme="whiteAlpha">
             <Thead>

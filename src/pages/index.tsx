@@ -1,8 +1,8 @@
 import { Input } from "@/components/Form/Input";
 import { Button, Flex, Stack } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 type SignInFormData = {
   email: string
