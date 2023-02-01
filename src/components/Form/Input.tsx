@@ -25,11 +25,11 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ nam
         {...rest}
       />
 
-      {/* {!!error && (
+      {!!error && (
         <FormErrorMessage>
           {error.message}
         </FormErrorMessage>
-      )} */}
+      )}
 
 
     </FormControl>

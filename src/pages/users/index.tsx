@@ -2,30 +2,37 @@
 import { Pagination } from '@/components/Pagination';
 import { Sidebar } from '@/components/Sidebar';
 import { api } from '@/services/api';
-import { useUsers } from '@/services/hooks/useUsers';
+import { getUsers, useUsers } from '@/services/hooks/useUsers';
 import { queryClient } from '@/services/queryClient';
 import { Box, Button, Checkbox, Flex, Heading, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue, Link as ChakraLink } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useState } from 'react';
 import { RiAddLine } from 'react-icons/ri';
 
-export default function UserList() {
+export default function UserList({ users }: any) {
   const [page, setPage] = useState(1)
 
-  const { data, isLoading, isFetching, error } = useUsers(page)
+  const { data, isLoading, isFetching, error } = useUsers(page
+    // , {
+    // initialData: users,
+    // }
+  )
+
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true
   })
 
-  async function handlePrefetchUser(userId: number) {
+  async function handlePrefetchUser(userId: string) {
     await queryClient.prefetchQuery(['user', userId], async () => {
       const response = await api.get(`users/${userId}`)
       return response.data
     },
       {
-        staleTime: 1000 * 60 * 10 // 10 minutes
+        // staleTime: 1000 * 60 * 10 // 10 minutes
+        staleTime: 1000 * 5 // 10 minutes
       })
   }
 
@@ -87,26 +94,21 @@ export default function UserList() {
                 </Thead>
                 <Tbody>
                   {data?.users?.map((user: any) => (
-                    <>
-                      <Tr key={user.id}>
-                        <Td px={["4", "4", "6"]}>
-                          <Checkbox colorScheme="pink" />
-                        </Td>
-                        <Td>
-                          <Box>
-                            <ChakraLink color="purple.400" onMouseEnter={() => handlePrefetchUser(user.id)}>
-                              <Text fontWeight="bold">{user.name}</Text>
-                            </ChakraLink>
+                    <Tr key={user.id * (Math.random() * Math.random())}>
+                      <Td px={["4", "4", "6"]}>
+                        <Checkbox colorScheme="pink" />
+                      </Td>
+                      <Td>
+                        <Box>
+                          <ChakraLink color="purple.400" onMouseEnter={() => handlePrefetchUser(user.id)}>
+                            <Text fontWeight="bold">{user.name}</Text>
+                          </ChakraLink>
 
-                            <Text fontSize="sm" color="gray.300">{user.email}</Text>
-                          </Box>
-                        </Td>
-                        {isWideVersion && <Td>{user.createdAt}</Td>}
-                        <Td>
-
-                        </Td>
-                      </Tr>
-                    </>
+                          <Text fontSize="sm" color="gray.300">{user.email}</Text>
+                        </Box>
+                      </Td>
+                      {isWideVersion && <Td>{user.createdAt}</Td>}
+                    </Tr>
                   ))}
 
                 </Tbody>
@@ -124,3 +126,16 @@ export default function UserList() {
     </Box>
   )
 }
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+
+//   const { users, totalCount } = await getUsers(1)
+
+//   console.log('users', users)
+
+//   return {
+//     props: {
+//       users
+//     }
+//   }
+// }
