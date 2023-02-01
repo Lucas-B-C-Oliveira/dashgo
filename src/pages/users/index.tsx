@@ -1,6 +1,7 @@
 
 import { Pagination } from '@/components/Pagination';
 import { Sidebar } from '@/components/Sidebar';
+import { api } from '@/services/api';
 import { Box, Button, Checkbox, Flex, Heading, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { RiAddLine } from 'react-icons/ri';
@@ -8,9 +9,8 @@ import { useQuery } from 'react-query'
 
 export default function UserList() {
 
-  const { data, isLoading, error } = useQuery('users', async () => {
-    const response = await fetch('http://localhost:3000/api/users')
-    const data = await response.json()
+  const { data, isLoading, isFetching, error } = useQuery('users', async () => {
+    const { data } = await api.get('users')
 
     const users = data.users.map((user: any) => {
       return {
@@ -28,12 +28,10 @@ export default function UserList() {
     return users
   }, { staleTime: 1000 * 5 })
 
-
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true
   })
-
 
   return (
     <Box>
@@ -42,7 +40,10 @@ export default function UserList() {
 
         <Box flex="1" borderRadius={8} bg="gray.800" p="8">
           <Flex mb="8" justify="space-between" align="center">
-            <Heading size="lg" fontWeight="normal">Usuários</Heading>
+            <Heading size="lg" fontWeight="normal">
+              Usuários
+              {!isLoading && isFetching && <Spinner size="sm" color="gray.500" ml="4" />}
+            </Heading>
 
             <Button
               as={Link}
